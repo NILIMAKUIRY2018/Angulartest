@@ -1,0 +1,30 @@
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js">
+</script>
+<script type="text/javascript">
+var app = angular.module("employees",[])
+app.controller("empDetails",function($scope){
+  $scope.listofEmps=[
+    {"name":"sudhir","salary":"1289"},
+    {"name":"Nilima","salary":"1299"},
+    {"name":"Puchu","salary":"2000"}
+  ];
+  $scope.addNewEmp=function(){
+    $scope.listofEmps.push({"name":"Nirvana","salary":"5000"});
+    alert("Employee details added");
+  }
+  $scope.removeEmp=function(index)
+  {
+    $scope.listofEmps.splice(index,1);
+    alert("Deleting index:"+index);
+  }
+});
+</script>
+<div ng-app="employees">
+  <ul ng-controller="empDetails">
+    <li ng-repeat="list in listofEmps | orderBy:'salary'">
+      {{list.name|uppercase}} - {{list.salary|currency}}
+      <a href="#" ng-click="removeEmp($index)">Delete User</a>
+    </li>
+    <li><button ng-click="addNewEmp()">Add New employee</button></li>
+  </ul>
+</div>
